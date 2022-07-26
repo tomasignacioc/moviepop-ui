@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import AuthContext from '../context/AuthContext'
 
 function ReviewForm() {
   const [review, setReview] = useState({})
   const { movieId } = useParams()
-  const authToken = null;
+
+  const { auth } = useContext(AuthContext)
 
   function handleInputchange(e) {
     setReview({
@@ -14,7 +16,7 @@ function ReviewForm() {
   }
 
   function handleSubmit(e) {
-    if (!authToken) {
+    if (!auth.token) {
       e.preventDefault()
       return alert("No tienes permiso para realizar esta acción! Inicia sesión primero")
     } else {
@@ -25,7 +27,7 @@ function ReviewForm() {
         cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjU4ODEzMDkwfQ.Vdh_qgWl6eNQ2T2W4BcVxd5RA4z7Z8d5MjnvNL7Lq9U"
+          "auth-token": auth.token
         },
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(review)

@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import AuthContext from '../context/AuthContext'
 import './Login.css'
 
 function Login({ setLogin, login }) {
   const [loginData, setLoginData] = useState({})
+
+  const { auth, setAuth } = useContext(AuthContext)
 
   function handleInputchange(e) {
     setLoginData({
@@ -28,10 +31,14 @@ function Login({ setLogin, login }) {
         return res.json()
       })
       .then(data => {
-        console.log(data)
+        setAuth({
+          token: data.token,
+          username: data.username
+        })
         alert(`${data.message}`)
       })
   }
+  console.log(auth);
   return (
     <div className='login-container'>
       <h1>Iniciar sesión</h1>

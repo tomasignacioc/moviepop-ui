@@ -9,7 +9,7 @@ import fixRating from '../services/fixRating'
 
 function MovieDetail() {
   let details = useLocation()
-  console.log(details);
+
   const { imagen, titulo, calificacion, lenguaje, generos, estreno, sinopsis, id } = details.state
 
   const [movieReviews, setMovieReviews] = useState([])
@@ -55,8 +55,8 @@ function MovieDetail() {
       <ReviewForm />
 
       <div>
-        {movieReviews && movieReviews.map(mr => (
-          <section>
+        {movieReviews && movieReviews.map((mr, i) => (
+          <section key={i}>
             <p>{mr.username}</p>
             <p>{mr.score}</p>
             <p>{mr.text}</p>
