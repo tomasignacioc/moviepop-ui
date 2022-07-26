@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
 import parse from 'html-react-parser'
-import ReviewForm from '../components/ReviewForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import StarRatings from 'react-star-ratings'
 
+import ReviewForm from '../components/ReviewForm'
 import fixRating from '../services/fixRating'
 import AuthContext from '../context/AuthContext'
+import './MovieDetail.css'
 
 function MovieDetail() {
   let details = useLocation()
@@ -54,13 +56,19 @@ function MovieDetail() {
   const fixedRating = fixRating(calificacion)
 
   return (
-    <main>
-      <nav><ul><li><NavLink to="/home" style={{ color: "#FFFFFF", fontSize: "1.5rem" }} >
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </NavLink></li></ul></nav>
-      <img src={imagen} alt="original portrait" />
-      <p><b>{fixedRating}</b></p>
-      <section>
+    <main className='movie-detail-container'>
+      <nav>
+        <ul><li><NavLink to="/home" style={{ color: "#FFFFFF", fontSize: "1.5rem" }} >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </NavLink></li></ul>
+      </nav>
+      <div className="card-detail-container">
+        <img src={imagen} alt="original portrait" />
+        <p>
+          <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="20px" starSpacing='2px' />
+        </p>
+      </div>
+      <section className='movie-information'>
         <h3>{titulo}</h3>
         <p>
           <b>Lenguaje: </b><span>{lenguaje}</span>
@@ -71,8 +79,6 @@ function MovieDetail() {
         <p>
           <b>Fecha de estreno: </b><span>{estreno}</span>
         </p>
-      </section>
-      <section>
         <h3>Sinopsis</h3>
         {parse(sinopsis)}
       </section>
@@ -81,13 +87,13 @@ function MovieDetail() {
 
       <ReviewForm />
 
-      <div>
+      <div className="reviews-from-users">
         {movieReviews && movieReviews.map((mr, i) => (
-          <section key={i}>
-            <p>{mr.username}</p>
-            <p>{mr.score}</p>
+          <fieldset key={i} >
+            <h4>{mr.username}</h4>
+            <p><StarRatings rating={mr.score} starRatedColor="#C48900" starDimension="20px" starSpacing='2px' /></p>
             <p>{mr.text}</p>
-          </section>
+          </fieldset>
         ))}
       </div>
     </main>

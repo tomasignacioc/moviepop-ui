@@ -1,0 +1,45 @@
+.movie-detail-container {
+  margin: 15px;
+}
+
+.movie-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-detail-container .card-detail-container,
+.movie-information {
+  flex-direction: col;
+  align-items: flex-end;
+}
+
+.card-detail-container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.card-detail-container img {
+  height: 400px;
+  width: 376px;
+}
+
+.card-detail-container p {
+  margin-left: -7.5rem;
+}
+
+
+@media (max-width: 415px) {
+  .movie-detail-container {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+  }
+
+  .movie-detail-container h3 {
+    text-align: center;
+    margin: 2rem auto;
+  }
+
+}
