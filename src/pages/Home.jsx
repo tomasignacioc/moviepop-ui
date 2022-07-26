@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MovieCard from '../components/MovieCard'
 import NavBar from '../layouts/NavBar';
+import './Home.css'
 
 import searchMovies from '../services/searchMovies'
 
@@ -23,14 +24,19 @@ function Home() {
   }
   return (
     <main>
-      <NavBar />
-      <form onSubmit={handleSubmit}>
-        <input type="search" placeholder="Buscar" onChange={handleChange} />
+      <div className='navbar-wrapper'>
+        <NavBar />
+      </div>
+      <form onSubmit={handleSubmit} className="home-searchbar">
+        <input id='search' type="search" placeholder="Buscar" onChange={handleChange} className="home-searchbar" />
       </form>
-      <h2>Peliculas</h2>
-      {movies && movies?.map(movie => (
-        <MovieCard key={movie.id} details={movie} />
-      ))}
+      <h2>Películas</h2>
+      <hr />
+      <div className='movies-wrapper'>
+        {movies && movies?.map(movie => (
+          <MovieCard key={movie.id} details={movie} className="movie-card" />
+        ))}
+      </div>
     </main>
   )
 }

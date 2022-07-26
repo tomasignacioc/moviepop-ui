@@ -1,19 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
 import parse from 'html-react-parser'
+import ReviewForm from '../components/ReviewForm'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import fixRating from '../services/fixRating'
 
 function MovieDetail() {
   let details = useLocation()
+  console.log(details);
+  const { imagen, titulo, calificacion, lenguaje, generos, estreno, sinopsis, id } = details.state
 
-  const { imagen, titulo, calificacion, lenguaje, generos, estreno, sinopsis } = details.state
+  const [movieReviews, setMovieReviews] = useState([])
+
+  useEffect(() => {
+    const getThisMovieReviews = async () => {
+      await fetch("http://localhost:3001/reviews/movie/" + id)
+        .then(res => res.json())
+        .then(data => setMovieReviews(data))
+    }
+
+    getThisMovieReviews()
+  }, [])
+
+
 
   const fixedRating = fixRating(calificacion)
 
   return (
     <main>
-      <nav><ul><li><NavLink to="/home" >Back</NavLink></li></ul></nav>
+      <nav><ul><li><NavLink to="/home" style={{ color: "#FFFFFF", fontSize: "1.5rem" }} >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </NavLink></li></ul></nav>
       <img src={imagen} alt="original portrait" />
       <p><b>{fixedRating}</b></p>
       <section>
@@ -32,6 +51,18 @@ function MovieDetail() {
         <h3>Sinopsis</h3>
         {parse(sinopsis)}
       </section>
+
+      <ReviewForm />
+
+      <div>
+        {movieReviews && movieReviews.map(mr => (
+          <section>
+            <p>{mr.username}</p>
+            <p>{mr.score}</p>
+            <p>{mr.text}</p>
+          </section>
+        ))}
+      </div>
     </main>
   )
 }

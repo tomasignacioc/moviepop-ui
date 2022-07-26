@@ -1,0 +1,68 @@
+.navbar-wrapper {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.home-searchbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+#search {
+  background-color: black;
+  color: #FFFFFF;
+  opacity: 0.1;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 100px;
+  margin-top: 10px;
+  margin-bottom: -15px;
+}
+
+#search::placeholder {
+  vertical-align: middle;
+  font-weight: 400;
+  font-size: 22px;
+  color: #FFF;
+  opacity: 1;
+}
+
+main h2 {
+  margin: 0 auto;
+  max-width: 800px;
+  padding-left: 2rem;
+}
+
+main hr {
+  margin: 10px auto 0 auto;
+  max-width: 360px;
+  opacity: 0.4;
+}
+
+.movies-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 450px) {
+  .movies-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+  }
+}

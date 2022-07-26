@@ -1,13 +1,17 @@
 import React from 'react'
-import cinema from '../assets/cinema.jpg'
+import cinema from '../assets/cinema-modified.png'
 import NavBar from '../layouts/NavBar';
+
+import './Landing.css'
 
 function Landing() {
     return (
-        <div>
+        <div className='landing-container'>
             <NavBar />
-            <img src={cinema} alt="cinema popcorn" />
-            <h1>MoviePop!</h1>
+            <div className='landing-center'>
+                <img src={cinema} alt="cinema popcorn" className='landing-logo' />
+                <h1 className='landing-title'>MoviePop!</h1>
+            </div>
         </div>
     )
 }

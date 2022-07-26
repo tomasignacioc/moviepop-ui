@@ -1,0 +1,33 @@
+.landing-title {
+  color: #C48900;
+  font-weight: 800;
+}
+
+.landing-container,
+.landing-center {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.landing-center {
+  margin-top: 100px;
+}
+
+@media (max-width: 500px) {
+  .landing-logo {
+    width: 332px;
+    height: 332px;
+  }
+}
+
+@media (max-width: 320px) {
+  .landing-logo {
+    width: 256px;
+    height: 256px;
+  }
+}
