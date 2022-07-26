@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faHouseChimney, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import './NavBar.css'
+import AuthContext from '../context/AuthContext';
 
 function NavBar() {
+  const { auth } = useContext(AuthContext)
 
   let activeStyle = {
     color: "#C48900",
@@ -19,6 +21,13 @@ function NavBar() {
   return (
     <nav>
       <ul>
+        {auth.token && <li id='navbar-userfavorites'>
+          <NavLink to="/user/favorites" style={({ isActive }) =>
+            isActive ? activeStyle : inactiveStyle
+          }>
+            Favoritos
+          </NavLink>
+        </li>}
         <li>
           <NavLink to="/" style={({ isActive }) =>
             isActive ? activeStyle : inactiveStyle

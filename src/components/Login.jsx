@@ -38,7 +38,7 @@ function Login({ setLogin, login }) {
         alert(`${data.message}`)
       })
   }
-  console.log(auth);
+
   return (
     <div className='login-container'>
       <h1>Iniciar sesión</h1>

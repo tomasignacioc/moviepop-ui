@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
 import parse from 'html-react-parser'
 import ReviewForm from '../components/ReviewForm'
@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import fixRating from '../services/fixRating'
+import AuthContext from '../context/AuthContext'
 
 function MovieDetail() {
   let details = useLocation()
+  const { auth } = useContext(AuthContext)
 
   const { imagen, titulo, calificacion, lenguaje, generos, estreno, sinopsis, id } = details.state
 
@@ -24,7 +26,30 @@ function MovieDetail() {
     getThisMovieReviews()
   }, [])
 
+  function addToFavs(e) {
+    // necesito token de usuario y nombre de peli
 
+    if (!auth.token) {
+      e.preventDefault()
+      return alert("No tienes permiso para realizar esta acción! Inicia sesión primero")
+    } else {
+      e.preventDefault()
+      fetch(`http://localhost:3001/favorites/add`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          "auth-token": auth.token
+        },
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify({ name: titulo })
+      })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+    }
+
+  }
 
   const fixedRating = fixRating(calificacion)
 
@@ -51,6 +76,8 @@ function MovieDetail() {
         <h3>Sinopsis</h3>
         {parse(sinopsis)}
       </section>
+
+      <button onClick={addToFavs}>agregar a favoritos</button>
 
       <ReviewForm />
 

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../context/AuthContext'
+import NavBar from '../layouts/NavBar'
 
 function UserFavorites() {
   const [userFavs, setUserFavs] = useState([])
@@ -24,9 +25,12 @@ function UserFavorites() {
 
     getUserFavorites()
   }, [])
-
+  console.log(userFavs);
   return (
     <main>
+      <div className='navbar-wrapper'>
+        <NavBar />
+      </div>
       <h1>Your favorite movies: </h1>
       {userFavs && userFavs.map(fav => (
         <p>

@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 
 function ReviewForm() {
-  const [review, setReview] = useState({})
+  const { auth } = useContext(AuthContext)
+  const [review, setReview] = useState({ username: auth.username })
   const { movieId } = useParams()
 
-  const { auth } = useContext(AuthContext)
 
   function handleInputchange(e) {
     setReview({
@@ -33,7 +33,7 @@ function ReviewForm() {
         body: JSON.stringify(review)
       })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => alert(data.message))
     }
   }
 
@@ -42,7 +42,6 @@ function ReviewForm() {
       <h1>Deja tu reseña</h1>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label>Nombre de usuario: </label><input type="text" name='username' required onChange={handleInputchange} />
           <label>Puntuación: </label><input type="range" min={1} max={5} step={0.5} name='score' required onChange={handleInputchange} /><b>{review.score}</b>
           <label>Reseña: </label><textarea type="textarea" rows={10} cols={30} name='text' required onChange={handleInputchange}></textarea>
         </fieldset>

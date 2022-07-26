@@ -10,9 +10,15 @@ ul {
   list-style-type: none;
   justify-content: right;
   margin-right: 1rem;
+  flex-wrap: wrap;
 }
 
 li {
   padding: 5px;
   font-size: 1.5rem;
+}
+
+#navbar-userfavorites {
+  margin-right: auto;
+  text-decoration: underline;
 }
