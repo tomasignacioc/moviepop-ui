@@ -25,16 +25,16 @@ function UserFavorites() {
 
     getUserFavorites()
   }, [])
-  console.log(userFavs);
+
   return (
     <main>
       <div className='navbar-wrapper'>
         <NavBar />
       </div>
-      <h1>Your favorite movies: </h1>
+      <h1 style={{ padding: "20px" }}>Your favorite movies: </h1>
       {userFavs && userFavs.map(fav => (
-        <p>
-          <span>
+        <p style={{ padding: "20px" }}>
+          <span >
             {fav.name}
           </span>
         </p>

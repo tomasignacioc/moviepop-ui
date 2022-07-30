@@ -62,28 +62,31 @@ function MovieDetail() {
           <FontAwesomeIcon icon={faArrowLeft} />
         </NavLink></li></ul>
       </nav>
-      <div className="card-detail-container">
-        <img src={imagen} alt="original portrait" />
-        <p>
-          <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="20px" starSpacing='2px' />
-        </p>
+      <div id='movie-card-information-container'>
+        <div className="card-detail-container">
+          <img src={imagen} alt="original portrait" />
+          <p>
+            <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="20px" starSpacing='1px' />
+          </p>
+        </div>
+        <section className='movie-information'>
+          <h3 id='title-h3'>{titulo}</h3>
+          <p>
+            <b>Lenguaje: </b><span>{lenguaje}</span>
+          </p>
+          <p>
+            <b>Géneros: </b><span>{generos}</span>
+          </p>
+          <p>
+            <b>Fecha de estreno: </b><span>{estreno}</span>
+          </p>
+          <h3 id='title-h3'>Sinopsis</h3>
+          {parse(sinopsis)}
+        </section>
       </div>
-      <section className='movie-information'>
-        <h3>{titulo}</h3>
-        <p>
-          <b>Lenguaje: </b><span>{lenguaje}</span>
-        </p>
-        <p>
-          <b>Géneros: </b><span>{generos}</span>
-        </p>
-        <p>
-          <b>Fecha de estreno: </b><span>{estreno}</span>
-        </p>
-        <h3>Sinopsis</h3>
-        {parse(sinopsis)}
-      </section>
 
-      <button onClick={addToFavs}>agregar a favoritos</button>
+
+      <button id="add-to-favs" onClick={addToFavs}>Agregar a favoritos</button>
 
       <ReviewForm />
 

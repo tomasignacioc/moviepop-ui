@@ -12,6 +12,7 @@ function Home() {
   useEffect(() => {
 
     searchMovies(search).then(data => setMovies(data))
+    setSearch(null)
   }, [])
 
   const handleChange = (e) => {
@@ -22,13 +23,16 @@ function Home() {
     e.preventDefault()
     searchMovies(search).then(data => setMovies(data))
   }
+  console.log(search);
   return (
     <main>
       <div className='navbar-wrapper'>
         <NavBar />
       </div>
-      <form onSubmit={handleSubmit} className="home-searchbar">
-        <input id='search' type="search" placeholder="Buscar" onChange={handleChange} className="home-searchbar" />
+      <form onSubmit={handleSubmit} id="home-searchbar">
+        {search ? null : <label htmlFor='search-movie'>Buscar</label>}
+        <input id='search-movie' type="search"
+          onChange={handleChange} className="home-searchbar" />
       </form>
       <h2>Películas</h2>
       <hr />

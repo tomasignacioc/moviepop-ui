@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
+import './ReviewForm.css'
 
 function ReviewForm() {
   const { auth } = useContext(AuthContext)
@@ -38,14 +39,14 @@ function ReviewForm() {
   }
 
   return (
-    <div>
+    <div className='review-form-container'>
       <h1>Deja tu reseña</h1>
-      <form onSubmit={handleSubmit}>
-        <fieldset>
+      <form onSubmit={handleSubmit} className="review-form">
+        <fieldset style={{ maxWidth: "320px" }}>
           <label>Puntuación: </label><input type="range" min={1} max={5} step={0.5} name='score' required onChange={handleInputchange} /><b>{review.score}</b>
-          <label>Reseña: </label><textarea type="textarea" rows={10} cols={30} name='text' required onChange={handleInputchange}></textarea>
+          <label>Reseña: </label><textarea type="textarea" rows={5} cols={30} name='text' required onChange={handleInputchange}></textarea>
         </fieldset>
-        <input type="submit" />
+        <input id='send-review' type="submit" />
       </form>
     </div>
   )
