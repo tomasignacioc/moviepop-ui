@@ -4,6 +4,8 @@ import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import StarRatings from 'react-star-ratings'
+import { Toaster } from 'react-hot-toast';
+import toastAlerts from '../services/toastAlerts'
 
 import ReviewForm from '../components/ReviewForm'
 import fixRating from '../services/fixRating'
@@ -29,11 +31,10 @@ function MovieDetail() {
   }, [])
 
   function addToFavs(e) {
-    // necesito token de usuario y nombre de peli
 
     if (!auth.token) {
       e.preventDefault()
-      return alert("No tienes permiso para realizar esta acción! Inicia sesión primero")
+      return toastAlerts({ error: "No tienes permiso para realizar esta acción! Inicia sesión primero" })
     } else {
       e.preventDefault()
       fetch(`http://localhost:3001/favorites/add`, {
@@ -48,7 +49,7 @@ function MovieDetail() {
         body: JSON.stringify({ name: titulo })
       })
         .then(res => res.json())
-        .then(data => alert(data.message))
+        .then(data => toastAlerts(data))
     }
 
   }
@@ -99,6 +100,7 @@ function MovieDetail() {
           </fieldset>
         ))}
       </div>
+      <Toaster />
     </main>
   )
 }

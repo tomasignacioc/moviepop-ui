@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import './SignUp.css'
+import { Toaster } from 'react-hot-toast';
+import toastAlerts from '../services/toastAlerts'
 
 function SignUp({ setLogin, login }) {
   const [formData, setFormData] = useState({})
@@ -27,8 +29,7 @@ function SignUp({ setLogin, login }) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        alert(`${data.message}`)
+        toastAlerts(data)
       })
 
     navigate("/login", { replace: true });
@@ -46,6 +47,7 @@ function SignUp({ setLogin, login }) {
         <input type="submit" />
       </form>
       <p>¿Ya tienes cuenta? <span onClick={() => setLogin(!login)} className="login-sign">Inicia sesión</span></p>
+      <Toaster />
     </div>
   )
 }

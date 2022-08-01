@@ -31,8 +31,8 @@ function UserFavorites() {
       <div className='navbar-wrapper'>
         <NavBar />
       </div>
-      <h1 style={{ padding: "20px" }}>Your favorite movies: </h1>
-      {userFavs && userFavs.map(fav => (
+      <h1 style={{ padding: "20px" }}>Películas favoritas de {userFavs.username}: </h1>
+      {userFavs.FavMovies && userFavs.FavMovies?.map(fav => (
         <p style={{ padding: "20px" }}>
           <span >
             {fav.name}

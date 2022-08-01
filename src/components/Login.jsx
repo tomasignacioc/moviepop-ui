@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 import './Login.css'
+import { Toaster } from 'react-hot-toast';
+import toastAlerts from '../services/toastAlerts'
 
 function Login({ setLogin, login }) {
   const [loginData, setLoginData] = useState({})
@@ -31,11 +33,13 @@ function Login({ setLogin, login }) {
         return res.json()
       })
       .then(data => {
-        setAuth({
-          token: data.token,
-          username: data.username
-        })
-        alert(`${data.message}`)
+        if (data.token) {
+          setAuth({
+            token: data.token,
+            username: data.username
+          })
+        }
+        toastAlerts(data)
       })
   }
 
@@ -50,6 +54,7 @@ function Login({ setLogin, login }) {
         <input type="submit" />
       </form>
       <p>¿No tienes una cuenta? <span onClick={() => setLogin(!login)} className="login-sign">Regístrate</span></p>
+      <Toaster />
     </div>
   )
 }

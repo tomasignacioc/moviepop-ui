@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import './ReviewForm.css'
+import { Toaster } from 'react-hot-toast';
+import toastAlerts from '../services/toastAlerts'
 
 function ReviewForm() {
   const { auth } = useContext(AuthContext)
@@ -19,7 +21,7 @@ function ReviewForm() {
   function handleSubmit(e) {
     if (!auth.token) {
       e.preventDefault()
-      return alert("No tienes permiso para realizar esta acción! Inicia sesión primero")
+      return toastAlerts({ error: "No tienes permiso para realizar esta acción! Inicia sesión primero" })
     } else {
       e.preventDefault()
       fetch(`http://localhost:3001/reviews/new/${movieId}`, {
@@ -34,7 +36,7 @@ function ReviewForm() {
         body: JSON.stringify(review)
       })
         .then(res => res.json())
-        .then(data => alert(data.message))
+        .then(data => toastAlerts(data))
     }
   }
 
@@ -48,6 +50,7 @@ function ReviewForm() {
         </fieldset>
         <input id='send-review' type="submit" />
       </form>
+      <Toaster />
     </div>
   )
 }
