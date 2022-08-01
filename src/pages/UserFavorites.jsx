@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import NavBar from '../layouts/NavBar'
 
@@ -6,6 +7,15 @@ function UserFavorites() {
   const [userFavs, setUserFavs] = useState([])
 
   const { auth } = useContext(AuthContext)
+
+  let activeStyle = {
+    color: "#C48900",
+    textDecoration: "underline"
+  };
+  let inactiveStyle = {
+    color: "#FFFFFF",
+    textDecoration: "underline"
+  };
 
   useEffect(() => {
 
@@ -34,9 +44,11 @@ function UserFavorites() {
       <h1 style={{ padding: "20px" }}>Películas favoritas de {userFavs.username}: </h1>
       {userFavs.FavMovies && userFavs.FavMovies?.map(fav => (
         <p style={{ padding: "20px" }}>
-          <span >
+          <NavLink to={`/home/${fav.name}`} style={({ isActive }) =>
+            isActive ? activeStyle : inactiveStyle
+          }>
             {fav.name}
-          </span>
+          </NavLink>
         </p>
       ))}
     </main>

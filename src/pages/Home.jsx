@@ -12,7 +12,6 @@ function Home() {
   useEffect(() => {
 
     searchMovies(search).then(data => setMovies(data))
-    setSearch(null)
   }, [])
 
   const handleChange = (e) => {
@@ -23,7 +22,7 @@ function Home() {
     e.preventDefault()
     searchMovies(search).then(data => setMovies(data))
   }
-  console.log(search);
+
   return (
     <main>
       <div className='navbar-wrapper'>

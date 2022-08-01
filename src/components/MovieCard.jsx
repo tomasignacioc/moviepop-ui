@@ -3,11 +3,10 @@ import { NavLink } from "react-router-dom";
 import './MovieCard.css'
 
 function MovieCard({ details }) {
-  const idParam = details.id.toString()
 
   return (
     <figure className='card-container'>
-      <NavLink to={idParam} state={details}>
+      <NavLink to={details.titulo} state={details}>
         <img src={details.imagen} alt="movie poster" />
       </NavLink>
 
