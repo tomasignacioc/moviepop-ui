@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './SignUp.css'
 import { Toaster } from 'react-hot-toast';
 import toastAlerts from '../services/toastAlerts'
+import axios from 'axios';
 
-function SignUp({ setLogin, login }) {
+function SignUp() {
   const [formData, setFormData] = useState({})
   let navigate = useNavigate();
 
@@ -17,20 +18,16 @@ function SignUp({ setLogin, login }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    await fetch("http://localhost:3001/auth/register", {
+    await axios({
       method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
+      url: '/auth/register',
       headers: {
         'Content-Type': 'application/json'
       },
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(formData)
+      data: JSON.stringify(formData)
     })
-      .then(res => res.json())
-      .then(data => {
-        toastAlerts(data)
-      })
+      .then(res => toastAlerts(res.data))
+      .catch(err => toastAlerts(err.response.data))
 
     navigate("/login", { replace: true });
   }
@@ -46,7 +43,7 @@ function SignUp({ setLogin, login }) {
         </fieldset>
         <input type="submit" />
       </form>
-      <p>¿Ya tienes cuenta? <span onClick={() => setLogin(!login)} className="login-sign">Inicia sesión</span></p>
+      <p>¿Ya tienes cuenta? <Link to='/login' className="login-sign">Inicia sesión</Link></p>
       <Toaster />
     </div>
   )

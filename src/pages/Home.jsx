@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import MovieCard from '../components/MovieCard'
-import NavBar from '../layouts/NavBar';
 import './Home.css'
 
 import searchMovies from '../services/searchMovies'
@@ -25,9 +24,6 @@ function Home() {
 
   return (
     <main>
-      <div className='navbar-wrapper'>
-        <NavBar />
-      </div>
       <form onSubmit={handleSubmit} id="home-searchbar">
         {search ? null : <label htmlFor='search-movie'>Buscar</label>}
         <input id='search-movie' type="search"

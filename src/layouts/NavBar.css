@@ -1,7 +1,7 @@
 nav {
   width: 100%;
   max-width: 800px;
-  margin-top: 1rem;
+  margin: 1rem auto 0 auto;
 }
 
 ul {

@@ -3,8 +3,10 @@ import AuthContext from '../context/AuthContext'
 import './Login.css'
 import { Toaster } from 'react-hot-toast';
 import toastAlerts from '../services/toastAlerts'
+import axios from 'axios'
+import { Link } from 'react-router-dom';
 
-function Login({ setLogin, login }) {
+function Login() {
   const [loginData, setLoginData] = useState({})
 
   const { auth, setAuth } = useContext(AuthContext)
@@ -18,29 +20,24 @@ function Login({ setLogin, login }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    fetch("http://localhost:3001/auth/login", {
+    axios({
       method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
+      url: '/auth/login',
       headers: {
         'Content-Type': 'application/json'
       },
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(loginData)
+      data: JSON.stringify(loginData)
     })
       .then(res => {
-        //const authToken = res.headers.get("Auth-Token") // --> this line return null (?)
-        return res.json()
-      })
-      .then(data => {
-        if (data.token) {
+        if (res.data.token) {
           setAuth({
-            token: data.token,
-            username: data.username
+            token: res.data.token,
+            username: res.data.username
           })
         }
-        toastAlerts(data)
+        toastAlerts(res.data)
       })
+      .catch(err => toastAlerts(err.response.data))
   }
 
   return (
@@ -53,7 +50,7 @@ function Login({ setLogin, login }) {
         </fieldset>
         <input type="submit" />
       </form>
-      <p>¿No tienes una cuenta? <span onClick={() => setLogin(!login)} className="login-sign">Regístrate</span></p>
+      <p>¿No tienes una cuenta? <Link to='/signup' className='login-sign'>Regístrate</Link></p>
       <Toaster />
     </div>
   )

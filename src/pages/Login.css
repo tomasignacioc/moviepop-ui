@@ -25,6 +25,7 @@ form fieldset {
 }
 
 .login-sign {
+  color: white;
   text-decoration: underline;
   cursor: pointer;
 }

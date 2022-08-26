@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import './ReviewForm.css'
 import { Toaster } from 'react-hot-toast';
 import toastAlerts from '../services/toastAlerts'
+import axios from 'axios';
 
 function ReviewForm() {
   const { auth } = useContext(AuthContext)
@@ -24,19 +25,18 @@ function ReviewForm() {
       return toastAlerts({ error: "No tienes permiso para realizar esta acción! Inicia sesión primero" })
     } else {
       e.preventDefault()
-      fetch(`http://localhost:3001/reviews/new/${movieId}`, {
+      axios({
         method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
+        url: `/reviews/new/${movieId}`,
         headers: {
           'Content-Type': 'application/json',
           "auth-token": auth.token
         },
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(review)
+        data: JSON.stringify(review)
       })
-        .then(res => res.json())
-        .then(data => toastAlerts(data))
+        .then(res => toastAlerts(res.data))
+        .catch(err => toastAlerts(err.response.data))
+
     }
   }
 

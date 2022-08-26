@@ -33,7 +33,7 @@
   width: 376px;
 }
 
-.card-detail-container p {
+.card-detail-container #star-ratings {
   margin-left: -7.5rem;
 }
 
