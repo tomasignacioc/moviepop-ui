@@ -15,6 +15,7 @@ import singleSearch from '../services/singleSearch'
 import AuthContext from '../context/AuthContext'
 import './MovieDetail.css'
 import axios from 'axios'
+import UserReview from '../components/UserReview'
 
 function MovieDetail() {
   const { auth } = useContext(AuthContext)
@@ -74,7 +75,7 @@ function MovieDetail() {
             <div className="card-detail-container">
               <img src={imagen} alt="original portrait" />
               <div id='star-ratings'>
-                <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="20px" starSpacing='1px' />
+                <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="30px" starSpacing='1px' />
               </div>
             </div>
             <section className='movie-information'>
@@ -100,11 +101,7 @@ function MovieDetail() {
 
           <div className="reviews-from-users">
             {movieReviews && movieReviews.map((mr, i) => (
-              <fieldset key={i} >
-                <h4>{mr.username}</h4>
-                <div><StarRatings rating={mr.score} starRatedColor="#C48900" starDimension="20px" starSpacing='2px' /></div>
-                <p>{mr.text}</p>
-              </fieldset>
+              <UserReview key={i} username={mr.username} score={mr.score} text={mr.text} />
             ))}
           </div>
           <Toaster />
