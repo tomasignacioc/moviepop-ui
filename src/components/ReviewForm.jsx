@@ -46,7 +46,7 @@ function ReviewForm() {
       <form onSubmit={handleSubmit} className="review-form">
         <fieldset style={{ maxWidth: "320px" }}>
           <label>Puntuación: </label><input type="range" min={1} max={5} step={0.5} name='score' required onChange={handleInputchange} /><b>{review.score}</b>
-          <label>Reseña: </label><textarea type="textarea" rows={5} cols={30} name='text' maxLength='150' required onChange={handleInputchange}></textarea>
+          <label>Reseña: </label><textarea type="textarea" rows={5} cols={30} name='text' maxLength='250' required onChange={handleInputchange}></textarea>
         </fieldset>
         <input id='send-review' type="submit" />
       </form>

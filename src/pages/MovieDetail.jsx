@@ -74,9 +74,9 @@ function MovieDetail() {
           <div id='movie-card-information-container'>
             <div className="card-detail-container">
               <img src={imagen} alt="original portrait" />
-              <div id='star-ratings'>
-                <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="30px" starSpacing='1px' />
-              </div>
+            </div>
+            <div id='star-ratings'>
+              <StarRatings rating={fixedRating} starRatedColor="#C48900" starDimension="30px" starSpacing='1px' />
             </div>
             <section className='movie-information'>
               <h3 id='title-h3'>{titulo}</h3>
@@ -91,11 +91,9 @@ function MovieDetail() {
               </p>
               <h3 id='title-h3'>Sinopsis</h3>
               {parse(sinopsis)}
+              <button id="add-to-favs" onClick={addToFavs}>Agregar a favoritos</button>
             </section>
           </div>
-
-
-          <button id="add-to-favs" onClick={addToFavs}>Agregar a favoritos</button>
 
           <ReviewForm />
 

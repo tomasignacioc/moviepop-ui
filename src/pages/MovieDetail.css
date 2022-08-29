@@ -41,14 +41,17 @@
   width: 376px;
 }
 
-.card-detail-container #star-ratings {
-  margin-left: -7.5rem;
+#star-ratings {
+  position: relative;
+  top: 365px;
+  left: -160px;
+  max-width: 160px;
 }
 
 #add-to-favs {
   font-size: 1.2rem;
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 30px;
   color: #C48900;
   background-color: rgba(255, 255, 255, 0.1);
   background-repeat: no-repeat;
@@ -82,6 +85,11 @@
     flex-direction: column;
   }
 
+  #star-ratings {
+    position: relative;
+    top: -2rem;
+    left: 13rem;
+  }
 }
 
 @media (max-width: 320px) {
@@ -89,5 +97,11 @@
     max-width: 300px;
     height: 350px;
     width: 376px;
+  }
+
+  #star-ratings {
+    position: relative;
+    top: -2rem;
+    left: 8rem;
   }
 }
