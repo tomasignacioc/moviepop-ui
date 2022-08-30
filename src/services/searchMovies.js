@@ -1,6 +1,6 @@
 
 const searchMovies = (search) => {
-  const result = fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
+  const result = fetch(`https://api.tvmaze.com/search/shows?q=${search}`)
     .then(res => res.json())
     .then(data => data.map(movie => (
       {
